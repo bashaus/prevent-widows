@@ -61,7 +61,7 @@ describe('posthtml', () => {
 });
 
 function transform(input, options) {
-  options = options || {}
+  options = options || null;
 
   return posthtml().use(preventWidows(options)).process(input, { sync: true }).html;
 }

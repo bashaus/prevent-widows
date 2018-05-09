@@ -29,24 +29,50 @@ describe('prevent widows', () => {
   describe('when the last character is a hyphen', () => {
     it('replaces the last hyphen with a non-breaking hyphen', () => {
       expect(preventWidows('Lorem-ipsum'))
-        .toEqual('Lorem&#x2011;ipsum');
+        .toEqual('Lorem&#8209;ipsum');
     });
 
     it('replaces the last hyphen in a paragraph with a non-breaking hyphen', () => {
       expect(preventWidows('Lorem ipsum dolar sit a-met'))
-        .toEqual('Lorem ipsum dolar sit a&#x2011;met');
+        .toEqual('Lorem ipsum dolar sit a&#8209;met');
     });
   });
 
   describe('when the last character is a non-breaking hyphen', () => {
     it('keeps the last non-breaking hyphen', () => {
-      expect(preventWidows('Lorem&#x2011;ipsum'))
-        .toEqual('Lorem&#x2011;ipsum');
+      expect(preventWidows('Lorem&#8209;ipsum'))
+        .toEqual('Lorem&#8209;ipsum');
     });
 
     it('keeps the last non-breaking hyphen in the paragraph', () => {
-      expect(preventWidows('Lorem ipsum dolar sit a&#x2011;met'))
-        .toEqual('Lorem ipsum dolar sit a&#x2011;met');
+      expect(preventWidows('Lorem ipsum dolar sit a&#8209;met'))
+        .toEqual('Lorem ipsum dolar sit a&#8209;met');
+    });
+  });
+
+  /* */
+
+  describe('transforms', () => {
+    it('transforms unicode space', () => {
+      expect(preventWidows('Lorem ipsum dolar sit a met', { encoding: 'unicode' }))
+        .toEqual('Lorem ipsum dolar sit a\u00a0met');
+    });
+
+    it('transforms unicode hyphen', () => {
+      expect(preventWidows('Lorem ipsum dolar sit a-met', { encoding: 'unicode' }))
+        .toEqual('Lorem ipsum dolar sit a\u2011met');
+    });
+  });
+
+  describe('transforms', () => {
+    it('transforms custom space', () => {
+      expect(preventWidows('Lorem ipsum dolar sit a met', { encoding: { space: 'X' } }))
+        .toEqual('Lorem ipsum dolar sit aXmet');
+    });
+
+    it('transforms custom hyphen', () => {
+      expect(preventWidows('Lorem ipsum dolar sit a-met', { encoding: { hyphen: 'X' } }))
+        .toEqual('Lorem ipsum dolar sit aXmet');
     });
   });
 });
