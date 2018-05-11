@@ -1,6 +1,6 @@
 const ENCODINGS = {
-  unicode : { space: '\u00a0' , hyphen: '\u2011' },
-  html    : { space: '&nbsp;' , hyphen: '&#8209;' }
+  html    : { space: '&nbsp;' , hyphen: '&#8209;' },
+  unicode : { space: '\u00a0' , hyphen: '\u2011' }
 };
 
 module.exports = function (text, options) {
@@ -43,14 +43,14 @@ module.exports = function (text, options) {
     // Replace space
     case lastSpace:
       return [
-        text.substring(0, lastSpace),
+        text.substring(0, lastSpace).trimRight(),
         text.substring(lastSpace + 1)
       ].join(encoding.space);
 
     // Replace hyphens
     case lastHyphen:
       return [
-        text.substring(0, lastHyphen),
+        text.substring(0, lastHyphen).trimRight(),
         text.substring(lastHyphen + 1)
       ].join(encoding.hyphen);
   }

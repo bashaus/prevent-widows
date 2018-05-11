@@ -13,14 +13,8 @@ module.exports = function(posthtmlOptions, textOptions) {
         return node;
       }
 
-      if (typeof node == 'string') {
-        return preventWidows(node);
-      }
-
-      return node;
+      return preventWidows(node);
     });
-
-    return nodes;
   }
 
   return function(tree) {
