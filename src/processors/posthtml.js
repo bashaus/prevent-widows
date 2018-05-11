@@ -8,8 +8,8 @@ module.exports = function(posthtmlOptions, textOptions) {
 
   function processNodes(nodes) {
     return nodes.map(node => {
-      if (typeof node == 'object' && node.content) {
-        node.content = processNodes(node.content);
+      if (typeof node == 'object') {
+        if (node.content) node.content = processNodes(node.content);
         return node;
       }
 

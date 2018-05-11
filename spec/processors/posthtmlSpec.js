@@ -58,6 +58,20 @@ describe('posthtml', () => {
       </div>
     `);
   });
+
+  it('does not affect non-children tags', () => {
+    expect(transform(`
+      <div prevent-widows>
+        <span>Lorem ipsum</span>
+        <img src="image.jpg">
+      </div>
+    `)).toEqual(`
+      <div>
+        <span>Lorem&nbsp;ipsum</span>
+        <img src="image.jpg">
+      </div>
+    `);
+  });
 });
 
 function transform(input, options) {

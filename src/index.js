@@ -32,26 +32,34 @@ module.exports = function (text, options) {
   // Identify which character is last
   const lastCharacter = Math.max(lastNbsp, lastSpace, lastNbHypen, lastHyphen);
 
+  // Is the last character a Single word? Non-breaking character already?
+  // Then no action is required
+  if ([ -1, lastNbsp, lastNbHypen ].includes(lastCharacter)) {
+    return text;
+  }
+
+  const beforeLastCharacter = text.substring(0, lastCharacter).trimRight();
+  const afterLastCharacter = text.substring(lastCharacter + 1);
+
+  // If there is only one word in the paragraph, do nothing
+  if (beforeLastCharacter == '') {
+    return text;
+  }
+
+  let conjuction = '';
+
   // Depending on the last character in the sentence
   switch (lastCharacter) {
-    // Single word? Non-breaking character already? Then Do nothing
-    case -1:
-    case lastNbsp:
-    case lastNbHypen:
-      return text;
-
     // Replace space
     case lastSpace:
-      return [
-        text.substring(0, lastSpace).trimRight(),
-        text.substring(lastSpace + 1)
-      ].join(encoding.space);
+      conjuction = encoding.space;
+      break;
 
     // Replace hyphens
     case lastHyphen:
-      return [
-        text.substring(0, lastHyphen).trimRight(),
-        text.substring(lastHyphen + 1)
-      ].join(encoding.hyphen);
+      conjuction = encoding.hyphen;
+      break;
   }
+
+  return [ beforeLastCharacter, afterLastCharacter ].join(conjuction);
 };

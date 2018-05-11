@@ -3,6 +3,40 @@ const expect = require('expect');
 
 describe('prevent widows', () => {
 
+  /* edge cases */
+
+  describe('edge cases', () => {
+    it('removes whitespace from before a widow', () => {
+      expect(preventWidows('Lorem ipsum dolar sit a\n   met'))
+        .toEqual('Lorem ipsum dolar sit a&nbsp;met');
+    });
+
+    it('does not modify a string of spaces', () => {
+      expect(preventWidows('   '))
+        .toEqual('   ');
+    });
+
+    it('does not modify an empty string', () => {
+      expect(preventWidows(''))
+        .toEqual('');
+    });
+
+    it('does not modify single words surrounded by spaces', () => {
+      expect(preventWidows('   Lorem   '))
+        .toEqual('   Lorem   ');
+    });
+
+    it('does not modify single words with spaces left', () => {
+      expect(preventWidows('   Lorem'))
+        .toEqual('   Lorem');
+    });
+
+    it('does not modify single words surrounded by spaces', () => {
+      expect(preventWidows('Lorem    '))
+        .toEqual('Lorem    ');
+    });
+  });
+
   /* space */
 
   describe('when the last character is a space', () => {
@@ -13,11 +47,6 @@ describe('prevent widows', () => {
 
     it('only replaces last space in sentenance with non-breaking space', () => {
       expect(preventWidows('Lorem ipsum dolar sit a met'))
-        .toEqual('Lorem ipsum dolar sit a&nbsp;met');
-    });
-
-    it('removes whitespace from before a widow', () => {
-      expect(preventWidows('Lorem ipsum dolar sit a\n   met'))
         .toEqual('Lorem ipsum dolar sit a&nbsp;met');
     });
   });

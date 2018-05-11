@@ -22,15 +22,13 @@ Prevent widows from appearing in a string.
 
 ```javascript
 const preventWidows = require('prevent-widows');
-
-const inputText = 'lorem ipsum dolar sit a met';
-const outputText = preventWidows(inputText);
+preventWidows('lorem ipsum dolar sit a met');
 // lorem ipsum dolar sit a&nbsp;met
 ```
 
 ## Options
 
-### Encoding
+### encoding
 
 Defines the type of output to transform the spaces and hyphens.
 
@@ -47,6 +45,12 @@ pre-defined encoding you specify.
 |--------------|------------------------|------------------------|
 | html         | `&nbsp;`               | `&#8209;`              |
 | unicode      | `\u00a0`               | `\u2011`               |
+
+For example:
+
+```javascript
+preventWidows('lorem ipsum dolar sit a met', { encoding: 'unicode' });
+```
 
 Alternatively, a custom encoding can be defined using an object:
 
@@ -92,7 +96,7 @@ const outputHTML = posthtml()
 
 The posthtml method also comes with the following options:
 
-### attrName
+#### attrName
 
 The name of the attribute which identifies where widows should be prevented on
 its children.
@@ -107,7 +111,7 @@ its children.
 <div prevent-widows>Prevent widows</div>
 ```
 
-### attrRemove
+#### attrRemove
 
 Whether or not to remove the attribute (see: `attrName`) from the element after
 the transform has been applied.

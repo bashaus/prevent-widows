@@ -1,6 +1,6 @@
 {
   "name": "prevent-widows",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Prevents widows from appearing in a document",
   "main": "index.js",
   "scripts": {
