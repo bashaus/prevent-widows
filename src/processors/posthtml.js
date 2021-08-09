@@ -1,19 +1,19 @@
 const preventWidows = require('../index.js');
 
-module.exports = function(posthtmlOptions, textOptions) {
+module.exports = function(posthtmlOptions) {
   posthtmlOptions = posthtmlOptions || {};
 
   if ('attrName' in posthtmlOptions === false) posthtmlOptions.attrName = 'prevent-widows';
   if ('attrRemove' in posthtmlOptions === false) posthtmlOptions.attrRemove = true;
 
-  function processNodes(nodes) {
+  function processNodes(nodes, options) {
     return nodes.map(node => {
       if (typeof node == 'object') {
-        if (node.content) node.content = processNodes(node.content);
+        if (node.content) node.content = processNodes(node.content, options);
         return node;
       }
 
-      return preventWidows(node);
+      return preventWidows(node, options);
     });
   }
 
@@ -29,7 +29,7 @@ module.exports = function(posthtmlOptions, textOptions) {
       }
 
       // Apply the content
-      node.content = processNodes(node.content, textOptions);
+      node.content = processNodes(node.content, posthtmlOptions);
 
       return node;
     });

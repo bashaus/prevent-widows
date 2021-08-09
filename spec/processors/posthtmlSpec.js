@@ -31,6 +31,20 @@ describe('posthtml', () => {
     `);
   });
 
+  it('allows encoding customization', () => {
+    expect(transform(`
+      <div prevent-widows>
+        <strong>Lorem ipsum</strong>
+        <strong>Lorem ipsum</strong>
+      </div>
+    `, { encoding: { space: '_' } })).toEqual(`
+      <div>
+        <strong>Lorem_ipsum</strong>
+        <strong>Lorem_ipsum</strong>
+      </div>
+    `);
+  });
+
   it('processes child nodes', () => {
     expect(transform(`
       <div prevent-widows>
