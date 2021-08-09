@@ -13,6 +13,8 @@ module.exports = function(posthtmlOptions, textOptions) {
         return node;
       }
 
+      if (typeof node === 'string' && /<!--/g.test(node)) return node;
+
       return preventWidows(node);
     });
   }
