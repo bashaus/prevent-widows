@@ -72,6 +72,20 @@ describe('posthtml', () => {
       </div>
     `);
   });
+
+  it('ignores comment tags', () => {
+    expect(transform(`
+      <div prevent-widows>
+        <strong>Lorem ipsum dolar sit a-met</strong>
+        <!-- html comment -->
+      </div>
+    `)).toEqual(`
+      <div>
+        <strong>Lorem ipsum dolar sit a&#8209;met</strong>
+        <!-- html comment -->
+      </div>
+    `);
+  });
 });
 
 function transform(input, options) {
