@@ -1,19 +1,18 @@
 # prevent-widows
 
-[![npm version][img:npm]][url:npm]
-[![build status][img:build-status]][url:build-status]
-
-> Prevent widows from appearing in a string
+Prevent widows from appearing in a string.
 
 This module replaces the spaces and hyphens at the end of a paragraph with
 non-breaking spaces and non-breaking hyphens to prevent widows.
 
-It comes with out-of-the-box support for strings, or can be integrated with posthtml.
+It comes with support for strings and posthtml.
 
 ## Installation
 
 ```
 npm install prevent-widows
+# - or -
+yarn add prevent-widows
 ```
 
 ## Usage
@@ -22,6 +21,12 @@ Prevent widows from appearing in a string.
 
 ```javascript
 const preventWidows = require('prevent-widows');
+preventWidows('lorem ipsum dolar sit a met');
+// lorem ipsum dolar sit a&nbsp;met
+```
+
+```typescript
+import preventWidows from 'prevent-widows';
 preventWidows('lorem ipsum dolar sit a met');
 // lorem ipsum dolar sit a&nbsp;met
 ```
@@ -135,9 +140,3 @@ When `false`, this will output:
 ```
 
 [url:posthtml]: https://github.com/posthtml/posthtml
-
-[img:build-status]: https://travis-ci.org/bashaus/prevent-widows.svg
-[url:build-status]: https://travis-ci.org/bashaus/prevent-widows
-
-[img:npm]: https://img.shields.io/npm/v/prevent-widows.svg
-[url:npm]: https://www.npmjs.com/package/prevent-widows

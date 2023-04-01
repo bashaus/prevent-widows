@@ -1,13 +1,7 @@
 {
   "name": "prevent-widows",
   "version": "1.0.2",
-  "description": "Prevents widows from appearing in a document",
-  "main": "index.js",
-  "scripts": {
-    "lint": "node_modules/.bin/eslint *.js src/*.js spec/*.js",
-    "pretest": "npm run lint",
-    "test": "istanbul cover node_modules/jasmine/bin/jasmine.js"
-  },
+  "description": "Prevent widows from appearing in a string.",
   "keywords": [
     "posthtml",
     "posthtml-plugin",
@@ -15,13 +9,17 @@
     "text",
     "widows"
   ],
-  "author": "Bashkim Isai",
   "license": "MIT",
+  "main": "index.js",
+  "scripts": {
+    "lint": "eslint *.js src/*.js spec/*.js",
+    "test": "istanbul cover jasmine"
+  },
   "devDependencies": {
-    "posthtml": "^0.11.3",
     "eslint": "^4.19.1",
     "expect": "^22.4.3",
     "istanbul": "^0.4.5",
-    "jasmine": "^3.1.0"
+    "jasmine": "^3.1.0",
+    "posthtml": "^0.11.3"
   }
 }
