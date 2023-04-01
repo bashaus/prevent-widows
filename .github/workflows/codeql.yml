@@ -4,8 +4,7 @@ name: CodeQL
 on:
   pull_request:
     branches:
-      - main
-      - develop
+      - '*'
 
 jobs:
   analyze:
