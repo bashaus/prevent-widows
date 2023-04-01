@@ -12,6 +12,7 @@
   "license": "MIT",
   "main": "index.js",
   "scripts": {
+    "build": "echo 'not implemented'; exit 0",
     "lint": "eslint *.js src/*.js spec/*.js",
     "test": "istanbul cover jasmine"
   },
