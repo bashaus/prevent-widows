@@ -1,6 +1,6 @@
 {
   "name": "prevent-widows",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "description": "Prevent widows from appearing in a string.",
   "keywords": [
     "posthtml",
