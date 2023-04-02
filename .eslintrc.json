@@ -1,15 +1,12 @@
 {
+  "root": true,
   "env": {
-    "es6": true,
     "node": true,
-    "browser": false,
-    "mocha": true
+    "jest": true
   },
-  "extends": "eslint:recommended",
-  "plugins": ["prettier"],
-  "parserOptions": {
-    "sourceType": "module"
-  },
+  "extends": ["eslint:recommended", "plugin:@typescript-eslint/recommended"],
+  "plugins": ["@typescript-eslint", "prettier"],
+  "parser": "@typescript-eslint/parser",
   "rules": {
     "prettier/prettier": 1
   }

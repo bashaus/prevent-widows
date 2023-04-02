@@ -1,21 +1,25 @@
-const ENCODINGS = {
-  html: { space: '&nbsp;', hyphen: '&#8209;' },
-  unicode: { space: '\u00a0', hyphen: '\u2011' },
+import Encodings from './encodings';
+import type { Encoding } from './encodings';
+
+export type PreventWindowsOptions = {
+  encoding: Encoding;
 };
 
-module.exports = function (text, options) {
-  const startAt = text.trimRight().length - 1;
+const defaultPreventWidowsOptions: PreventWindowsOptions = {
+  encoding: Encodings.HTML,
+};
 
-  options = options || {};
-  if ('encoding' in options === false) options.encoding = 'html';
+const preventWidows = (
+  text: string,
+  customPreventWidowsOptions: Partial<PreventWindowsOptions> = defaultPreventWidowsOptions
+) => {
+  const options: PreventWindowsOptions = {
+    ...defaultPreventWidowsOptions,
+    ...customPreventWidowsOptions,
+  };
 
-  // If the encoding is a string, then it's a default encoding
-  let encoding = null;
-  if (typeof options.encoding == 'string') {
-    encoding = ENCODINGS[options.encoding];
-  } else {
-    encoding = options.encoding;
-  }
+  const { encoding } = options;
+  const startAt = text.trimEnd().length - 1;
 
   let lastNbsp = -1,
     lastSpace = -1,
@@ -41,7 +45,7 @@ module.exports = function (text, options) {
     return text;
   }
 
-  const beforeLastCharacter = text.substring(0, lastCharacter).trimRight();
+  const beforeLastCharacter = text.substring(0, lastCharacter).trimEnd();
   const afterLastCharacter = text.substring(lastCharacter + 1);
 
   // If there is only one word in the paragraph, do nothing
@@ -66,3 +70,5 @@ module.exports = function (text, options) {
 
   return [beforeLastCharacter, afterLastCharacter].join(conjuction);
 };
+
+export default preventWidows;

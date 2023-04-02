@@ -1,5 +1,4 @@
-const preventWidows = require('../index.js');
-const expect = require('expect');
+import preventWidows from '.';
 
 describe('prevent widows', () => {
   /* edge cases */
