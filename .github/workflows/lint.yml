@@ -1,6 +1,10 @@
+---
 name: Lint
 
 on:
+  push:
+    branches:
+      - '*'
   pull_request:
     branches:
       - '*'
@@ -18,8 +22,8 @@ jobs:
       - name: yarn
         run: yarn install --frozen-lockfile
 
-      # - name: prettier
-      #   run: yarn prettier --check .
+      - name: prettier
+        run: yarn prettier --check .
 
       - name: lint
         run: yarn lint

@@ -37,31 +37,31 @@ preventWidows('lorem ipsum dolar sit a met');
 
 Defines the type of output to transform the spaces and hyphens.
 
-* Since: `1.0.0`
-* Property is `Optional`
-* Default value is: `html`
-* Validation rules:
-  * Must be a predefined format as a `String` or an `Object`
+- Since: `1.0.0`
+- Property is `Optional`
+- Default value is: `Encodings.HTML`
+- Validation rules:
+  - Must be a type of `Encoding`
 
 This table describes how values will be transformed depending on what type of
 pre-defined encoding you specify.
 
-| Encoding     | Space character        | Hyphen character       |
-|--------------|------------------------|------------------------|
-| html         | `&nbsp;`               | `&#8209;`              |
-| unicode      | `\u00a0`               | `\u2011`               |
+| Encoding | Space character | Hyphen character |
+| -------- | --------------- | ---------------- |
+| html     | `&nbsp;`        | `&#8209;`        |
+| unicode  | `\u00a0`        | `\u2011`         |
 
 For example:
 
-```javascript
-preventWidows('lorem ipsum dolar sit a met', { encoding: 'unicode' });
+```typescript
+preventWidows('lorem ipsum dolar sit a met', { encoding: Encodings.UNICODE });
 ```
 
 Alternatively, a custom encoding can be defined using an object:
 
-```javascript
+```typescript
 preventWidows('lorem ipsum dolar sit a met', {
-  encoding: { space: '_', hyphen: '~' }
+  encoding: { space: '_', hyphen: '~' },
 });
 
 // lorem ipsum dolar sit a_met
@@ -75,24 +75,26 @@ This module comes with out-of-the-box support for [posthtml][url:posthtml].
 
 The posthtml function exposes an additional parameter: `posthtmlOptions`.
 
-```javascript
-const posthtml = require('posthtml');
-const preventWidows = require('prevent-widows');
-posthtml()
-  .use(preventWidows.posthtml(posthtmlOptions, options));
+```typescript
+import posthtml from 'posthtml';
+import preventWidows from 'prevent-widows';
+
+posthtml().use(preventWidows.posthtml(posthtmlOptions, preventWidowsOptions));
 ```
 
 ### Example
 
-```javascript
-const posthtml = require('posthtml');
-const preventWidows = require('prevent-widows');
+```typescript
+import posthtml from 'posthtml';
+import preventWidows from 'prevent-widows';
 
-const inputHTML = '<div prevent-widows>lorem ipsum dolar sit a met</div>';
-const outputHTML = posthtml()
-  .use(preventWidows.posthtml())
-  .process(inputHTML, { sync: true })
-  .html;
+(async () => {
+  const input = '<div prevent-widows>lorem ipsum dolar sit a met</div>';
+
+  const { html } = await posthtml().use(preventWidows.posthtml()).process(input);
+
+  console.log(html);
+})();
 
 // <div>lorem ipsum dolar sit a&nbsp;met</div>
 ```
@@ -106,11 +108,11 @@ The posthtml method also comes with the following options:
 The name of the attribute which identifies where widows should be prevented on
 its children.
 
-* Since: `1.0.0`
-* Property is `Optional`
-* Default value is: `prevent-widows`
-* Validation rules:
-  * Must be a valid HTML attribute name
+- Since: `1.0.0`
+- Property is `Optional`
+- Default value is: `prevent-widows`
+- Validation rules:
+  - Must be a valid HTML attribute name
 
 ```html
 <div prevent-widows>Prevent widows</div>
@@ -121,11 +123,11 @@ its children.
 Whether or not to remove the attribute (see: `attrName`) from the element after
 the transform has been applied.
 
-* Since: `1.0.0`
-* Property is `Optional`
-* Default value is: `true`
-* Validation rules:
-  * Must be a boolean value: `true` or `false`
+- Since: `1.0.0`
+- Property is `Optional`
+- Default value is: `true`
+- Validation rules:
+  - Must be a boolean value: `true` or `false`
 
 When `true` and by default, this will output:
 
