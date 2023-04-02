@@ -1,6 +1,6 @@
 const ENCODINGS = {
-  html    : { space: '&nbsp;' , hyphen: '&#8209;' },
-  unicode : { space: '\u00a0' , hyphen: '\u2011' }
+  html: { space: '&nbsp;', hyphen: '&#8209;' },
+  unicode: { space: '\u00a0', hyphen: '\u2011' },
 };
 
 module.exports = function (text, options) {
@@ -17,7 +17,10 @@ module.exports = function (text, options) {
     encoding = options.encoding;
   }
 
-  let lastNbsp = -1, lastSpace = -1, lastNbHypen = -1, lastHyphen = -1;
+  let lastNbsp = -1,
+    lastSpace = -1,
+    lastNbHypen = -1,
+    lastHyphen = -1;
 
   if (encoding.space) {
     lastNbsp = text.lastIndexOf(encoding.space, startAt);
@@ -34,7 +37,7 @@ module.exports = function (text, options) {
 
   // Is the last character a Single word? Non-breaking character already?
   // Then no action is required
-  if ([ -1, lastNbsp, lastNbHypen ].includes(lastCharacter)) {
+  if ([-1, lastNbsp, lastNbHypen].includes(lastCharacter)) {
     return text;
   }
 
@@ -61,5 +64,5 @@ module.exports = function (text, options) {
       break;
   }
 
-  return [ beforeLastCharacter, afterLastCharacter ].join(conjuction);
+  return [beforeLastCharacter, afterLastCharacter].join(conjuction);
 };
