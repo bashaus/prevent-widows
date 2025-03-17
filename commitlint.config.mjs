@@ -1,3 +1,5 @@
-module.exports = {
+// @ts-check
+
+export default {
   extends: ["@commitlint/config-conventional"],
 };
