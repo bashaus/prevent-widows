@@ -4,10 +4,10 @@ name: CodeQL
 on:
   push:
     branches:
-      - '*'
+      - "*"
   pull_request:
     branches:
-      - '*'
+      - "*"
 
 jobs:
   analyze:
@@ -22,8 +22,8 @@ jobs:
         with:
           fetch-depth: 0
 
-      - uses: github/codeql-action/init@v1
+      - uses: github/codeql-action/init@v3
         with:
           languages: javascript
 
-      - uses: github/codeql-action/analyze@v1
+      - uses: github/codeql-action/analyze@v3

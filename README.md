@@ -20,14 +20,14 @@ yarn add prevent-widows
 Prevent widows from appearing in a string.
 
 ```javascript
-const preventWidows = require('prevent-widows');
-preventWidows('lorem ipsum dolar sit a met');
+const preventWidows = require("prevent-widows");
+preventWidows("lorem ipsum dolar sit a met");
 // lorem ipsum dolar sit a&nbsp;met
 ```
 
 ```typescript
-import preventWidows from 'prevent-widows';
-preventWidows('lorem ipsum dolar sit a met');
+import preventWidows from "prevent-widows";
+preventWidows("lorem ipsum dolar sit a met");
 // lorem ipsum dolar sit a&nbsp;met
 ```
 
@@ -54,14 +54,14 @@ pre-defined encoding you specify.
 For example:
 
 ```typescript
-preventWidows('lorem ipsum dolar sit a met', { encoding: Encodings.UNICODE });
+preventWidows("lorem ipsum dolar sit a met", { encoding: Encodings.UNICODE });
 ```
 
 Alternatively, a custom encoding can be defined using an object:
 
 ```typescript
-preventWidows('lorem ipsum dolar sit a met', {
-  encoding: { space: '_', hyphen: '~' },
+preventWidows("lorem ipsum dolar sit a met", {
+  encoding: { space: "_", hyphen: "~" },
 });
 
 // lorem ipsum dolar sit a_met
@@ -76,8 +76,8 @@ This module comes with out-of-the-box support for [posthtml][url:posthtml].
 The posthtml function exposes an additional parameter: `posthtmlOptions`.
 
 ```typescript
-import posthtml from 'posthtml';
-import preventWidows from 'prevent-widows';
+import posthtml from "posthtml";
+import preventWidows from "prevent-widows";
 
 posthtml().use(preventWidows.posthtml(posthtmlOptions, preventWidowsOptions));
 ```
@@ -85,11 +85,11 @@ posthtml().use(preventWidows.posthtml(posthtmlOptions, preventWidowsOptions));
 ### Example
 
 ```typescript
-import posthtml from 'posthtml';
-import preventWidows from 'prevent-widows';
+import posthtml from "posthtml";
+import preventWidows from "prevent-widows";
 
 (async () => {
-  const input = '<div prevent-widows>lorem ipsum dolar sit a met</div>';
+  const input = "<div prevent-widows>lorem ipsum dolar sit a met</div>";
 
   const { html } = await posthtml().use(preventWidows.posthtml()).process(input);
 
