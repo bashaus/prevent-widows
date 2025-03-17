@@ -1,5 +1,5 @@
-import type { Node, Plugin } from 'posthtml';
-import preventWidows, { PreventWindowsOptions } from '..';
+import type { Node, Plugin } from "posthtml";
+import preventWidows, { PreventWindowsOptions } from "..";
 
 export type PosthtmlOptions = {
   attrName: string;
@@ -7,14 +7,14 @@ export type PosthtmlOptions = {
 };
 
 const defaultPosthtmlOptions = {
-  attrName: 'prevent-widows',
+  attrName: "prevent-widows",
   attrRemove: true,
 };
 
 const posthtml = (
   customPosthtmlOptions: Partial<PosthtmlOptions> = defaultPosthtmlOptions,
-  preventWidowsOptions?: PreventWindowsOptions
-): Plugin<any> => {
+  preventWidowsOptions?: PreventWindowsOptions,
+): Plugin<unknown> => {
   const posthtmlOptions = {
     ...defaultPosthtmlOptions,
     ...customPosthtmlOptions,
@@ -22,7 +22,7 @@ const posthtml = (
 
   function processNodes(nodes: Array<Node | string>) {
     return nodes.map((node) => {
-      if (typeof node == 'object') {
+      if (typeof node == "object") {
         if (node.content) {
           node.content = processNodes(node.content);
         }
@@ -30,7 +30,7 @@ const posthtml = (
         return node;
       }
 
-      if (typeof node === 'string' && /<!--/g.test(node)) {
+      if (typeof node === "string" && /<!--/g.test(node)) {
         return node;
       }
 
@@ -40,7 +40,7 @@ const posthtml = (
 
   return (tree) => {
     const attrMatch = {
-      [posthtmlOptions.attrName]: '',
+      [posthtmlOptions.attrName]: "",
     };
 
     tree.match({ attrs: attrMatch }, (node) => {

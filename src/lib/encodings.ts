@@ -4,13 +4,13 @@ export type Encoding = {
 };
 
 const HTML: Encoding = {
-  space: '&nbsp;',
-  hyphen: '&#8209;',
+  space: "&nbsp;",
+  hyphen: "&#8209;",
 };
 
 const UNICODE: Encoding = {
-  space: '\u00a0',
-  hyphen: '\u2011',
+  space: "\u00a0",
+  hyphen: "\u2011",
 };
 
 export default {

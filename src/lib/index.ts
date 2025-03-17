@@ -1,5 +1,5 @@
-import Encodings from './encodings';
-import type { Encoding } from './encodings';
+import Encodings from "./encodings";
+import type { Encoding } from "./encodings";
 
 export type PreventWindowsOptions = {
   encoding: Encoding;
@@ -11,7 +11,7 @@ const defaultPreventWidowsOptions: PreventWindowsOptions = {
 
 const preventWidows = (
   text: string,
-  customPreventWidowsOptions: Partial<PreventWindowsOptions> = defaultPreventWidowsOptions
+  customPreventWidowsOptions: Partial<PreventWindowsOptions> = defaultPreventWidowsOptions,
 ) => {
   const options: PreventWindowsOptions = {
     ...defaultPreventWidowsOptions,
@@ -28,12 +28,12 @@ const preventWidows = (
 
   if (encoding.space) {
     lastNbsp = text.lastIndexOf(encoding.space, startAt);
-    lastSpace = text.lastIndexOf(' ', startAt);
+    lastSpace = text.lastIndexOf(" ", startAt);
   }
 
   if (encoding.hyphen) {
     lastNbHypen = text.lastIndexOf(encoding.hyphen, startAt);
-    lastHyphen = text.lastIndexOf('-', startAt);
+    lastHyphen = text.lastIndexOf("-", startAt);
   }
 
   // Identify which character is last
@@ -49,11 +49,11 @@ const preventWidows = (
   const afterLastCharacter = text.substring(lastCharacter + 1);
 
   // If there is only one word in the paragraph, do nothing
-  if (beforeLastCharacter == '') {
+  if (beforeLastCharacter == "") {
     return text;
   }
 
-  let conjuction = '';
+  let conjuction = "";
 
   // Depending on the last character in the sentence
   switch (lastCharacter) {

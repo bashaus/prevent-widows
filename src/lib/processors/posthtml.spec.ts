@@ -1,8 +1,8 @@
-import posthtml from 'posthtml';
-import { posthtml as preventWidows } from '../../index';
+import posthtml from "posthtml";
+import { posthtml as preventWidows } from "../../index";
 
-describe('posthtml', () => {
-  it('can retain prevent-widows', async () => {
+describe("posthtml", () => {
+  it("can retain prevent-widows", async () => {
     const input = `
       <div prevent-widows>
         <strong>Lorem ipsum</strong>
@@ -24,7 +24,7 @@ describe('posthtml', () => {
     expect(html).toEqual(expected);
   });
 
-  it('uses a custom attribute', async () => {
+  it("uses a custom attribute", async () => {
     const input = `
       <div no-widows>
         <strong>Lorem ipsum</strong>
@@ -40,13 +40,13 @@ describe('posthtml', () => {
     `;
 
     const { html } = await posthtml()
-      .use(preventWidows({ attrName: 'no-widows' }))
+      .use(preventWidows({ attrName: "no-widows" }))
       .process(input);
 
     expect(html).toEqual(expected);
   });
 
-  it('processes child nodes', async () => {
+  it("processes child nodes", async () => {
     const input = `
       <div prevent-widows>
         <strong>Lorem ipsum</strong>
@@ -65,7 +65,7 @@ describe('posthtml', () => {
     expect(html).toEqual(expected);
   });
 
-  it('replaces spaces with mixed prevention', async () => {
+  it("replaces spaces with mixed prevention", async () => {
     const input = `
       <div>
         <span>Lorem ipsum</span>
@@ -84,7 +84,7 @@ describe('posthtml', () => {
     expect(html).toEqual(expected);
   });
 
-  it('does not affect non-children tags', async () => {
+  it("does not affect non-children tags", async () => {
     const input = `
       <div prevent-widows>
         <span>Lorem ipsum</span>
@@ -103,7 +103,7 @@ describe('posthtml', () => {
     expect(html).toEqual(expected);
   });
 
-  it('ignores comment tags', async () => {
+  it("ignores comment tags", async () => {
     const input = `
       <div prevent-widows>
         <strong>Lorem ipsum dolar sit a-met</strong>
