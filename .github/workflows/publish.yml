@@ -4,7 +4,7 @@ name: Publish
 on:
   release:
     types:
-      - created
+      - published
 
 jobs:
   publish:
@@ -18,6 +18,7 @@ jobs:
         with:
           node-version: "22.x"
           cache: "npm"
+          registry-url: "https://registry.npmjs.org"
 
       - name: install
         run: npm ci
