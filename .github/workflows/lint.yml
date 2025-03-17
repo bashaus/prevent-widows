@@ -13,17 +13,17 @@ jobs:
   lint:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
-          node-version: '18.x'
-          cache: 'yarn'
+          node-version: '22.x'
+          cache: 'npm'
 
-      - name: yarn
-        run: yarn install --frozen-lockfile
+      - name: install
+        run: npm ci
 
       - name: prettier
-        run: yarn prettier --check .
+        run: npx prettier --check .
 
       - name: lint
-        run: yarn lint
+        run: npm run lint
