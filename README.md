@@ -1,5 +1,7 @@
 # prevent-widows
 
+[![codecov](https://codecov.io/gh/bashaus/prevent-widows/graph/badge.svg?token=7QNC6PIHUG)](https://codecov.io/gh/bashaus/prevent-widows)
+
 Prevent widows from appearing in a string.
 
 This module replaces the spaces and hyphens at the end of a paragraph with
