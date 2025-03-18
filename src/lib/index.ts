@@ -23,7 +23,7 @@ const preventWidows = (
 
   let lastNbsp = -1,
     lastSpace = -1,
-    lastNbHypen = -1,
+    lastNbHyphen = -1,
     lastHyphen = -1;
 
   if (encoding.space) {
@@ -32,16 +32,16 @@ const preventWidows = (
   }
 
   if (encoding.hyphen) {
-    lastNbHypen = text.lastIndexOf(encoding.hyphen, startAt);
+    lastNbHyphen = text.lastIndexOf(encoding.hyphen, startAt);
     lastHyphen = text.lastIndexOf("-", startAt);
   }
 
   // Identify which character is last
-  const lastCharacter = Math.max(lastNbsp, lastSpace, lastNbHypen, lastHyphen);
+  const lastCharacter = Math.max(lastNbsp, lastSpace, lastNbHyphen, lastHyphen);
 
   // Is the last character a Single word? Non-breaking character already?
   // Then no action is required
-  if ([-1, lastNbsp, lastNbHypen].includes(lastCharacter)) {
+  if ([-1, lastNbsp, lastNbHyphen].includes(lastCharacter)) {
     return text;
   }
 
@@ -53,22 +53,22 @@ const preventWidows = (
     return text;
   }
 
-  let conjuction = "";
+  let conjunction = "";
 
   // Depending on the last character in the sentence
   switch (lastCharacter) {
     // Replace space
     case lastSpace:
-      conjuction = encoding.space;
+      conjunction = encoding.space;
       break;
 
     // Replace hyphens
     case lastHyphen:
-      conjuction = encoding.hyphen;
+      conjunction = encoding.hyphen;
       break;
   }
 
-  return [beforeLastCharacter, afterLastCharacter].join(conjuction);
+  return [beforeLastCharacter, afterLastCharacter].join(conjunction);
 };
 
 export default preventWidows;
