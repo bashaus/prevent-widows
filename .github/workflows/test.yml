@@ -19,13 +19,22 @@ jobs:
           node-version: "22.x"
           cache: "npm"
 
-      - name: install
+      - name: npm ci
         run: npm ci
 
-      - name: test
-        run: npm test -- --coverage
+      - name: npm test
+        run: npm test -- --coverage --reporters=jest-junit
+        env:
+          JEST_JUNIT_CLASSNAME: junit.xml
 
-      - name: codecov
+      - name: codecov coverage
+        if: ${{ !cancelled() }}
         uses: codecov/codecov-action@v5
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+
+      - name: codecov test results
+        if: ${{ !cancelled() }}
+        uses: codecov/test-results-action@v1
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
