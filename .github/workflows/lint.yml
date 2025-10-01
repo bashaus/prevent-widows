@@ -1,10 +1,11 @@
 ---
-name: Lint
+name: lint
 
 on:
   push:
     branches:
       - "*"
+
   pull_request:
     branches:
       - "*"
@@ -13,8 +14,8 @@ jobs:
   lint:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
         with:
           node-version: "22.x"
           cache: "npm"
@@ -26,4 +27,4 @@ jobs:
         run: npx prettier --check .
 
       - name: lint
-        run: npm run lint
+        run: npx eslint .
