@@ -1,6 +1,7 @@
 # prevent-widows
 
-[![codecov](https://codecov.io/gh/bashaus/prevent-widows/graph/badge.svg?token=7QNC6PIHUG)](https://codecov.io/gh/bashaus/prevent-widows)
+[![github actions build][img:gh-build]][url:gh-build]
+[![code coverage][img:codecov]][url:codecov]
 
 Prevent widows from appearing in a string.
 
@@ -144,3 +145,7 @@ When `false`, this will output:
 ```
 
 [url:posthtml]: https://github.com/posthtml/posthtml
+[img:codecov]: https://codecov.io/gh/bashaus/prevent-widows/graph/badge.svg?token=D79154VC17
+[url:codecov]: https://codecov.io/gh/bashaus/prevent-widows
+[img:gh-build]: https://github.com/bashaus/prevent-widows/actions/workflows/build.yml/badge.svg
+[url:gh-build]: https://github.com/bashaus/prevent-widows/actions/workflows/build.yml

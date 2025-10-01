@@ -1,1 +1,5 @@
+#!/bin/sh
+npx sort-package-json
+npx prettier --check .
+npx eslint .
 npm test
