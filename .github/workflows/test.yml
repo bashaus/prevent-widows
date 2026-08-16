@@ -3,39 +3,42 @@ name: test
 
 on:
   push:
-    branches:
-      - "*"
-
   pull_request:
-    branches:
-      - "*"
 
 jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v7
+
       - uses: actions/setup-node@v6
         with:
-          node-version: "22.x"
-          cache: "npm"
+          node-version-file: ".nvmrc"
+          cache: npm
 
       - name: install
         run: npm ci
 
+      - name: build
+        run: npm run build
+
+      - uses: actions/upload-artifact@v7
+        with:
+          name: dist
+          path: dist
+
       - name: test
-        run: npm test -- --coverage --reporters=jest-junit
-        env:
-          JEST_JUNIT_CLASSNAME: junit.xml
+        run: npm test -- --coverage
+
+      - uses: actions/upload-artifact@v7
+        with:
+          name: coverage
+          path: coverage
 
       - name: codecov coverage
-        if: ${{ !cancelled() }}
-        uses: codecov/codecov-action@v5
+        uses: codecov/codecov-action@v7
         with:
-          token: ${{ secrets.CODECOV_TOKEN }}
-
-      - name: codecov test results
-        if: ${{ !cancelled() }}
-        uses: codecov/test-results-action@v1
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }}
+          directory: coverage
+          files: ./coverage/lcov.info
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
