@@ -1,5 +1,6 @@
 import posthtml from "posthtml";
-import { posthtml as preventWidows } from "../../index";
+
+import preventWidows from "./posthtml";
 
 describe("posthtml", () => {
   it("can retain prevent-widows", async () => {
@@ -117,6 +118,109 @@ describe("posthtml", () => {
         <!-- html comment -->
       </div>
     `;
+
+    const { html } = await posthtml().use(preventWidows()).process(input);
+    expect(html).toEqual(expected);
+  });
+
+  it("handles nodes without content", async () => {
+    const input = `
+      <div prevent-widows>
+        <img src="test.jpg">
+      </div>
+    `;
+
+    const expected = `
+      <div>
+        <img src="test.jpg">
+      </div>
+    `;
+
+    const { html } = await posthtml().use(preventWidows()).process(input);
+    expect(html).toEqual(expected);
+  });
+
+  it("handles deeply nested prevent-widows elements", async () => {
+    const input = `
+      <div prevent-widows>
+        <div>
+          <span>Lorem ipsum</span>
+        </div>
+      </div>
+    `;
+
+    const expected = `
+      <div>
+        <div>
+          <span>Lorem&nbsp;ipsum</span>
+        </div>
+      </div>
+    `;
+
+    const { html } = await posthtml().use(preventWidows()).process(input);
+    expect(html).toEqual(expected);
+  });
+
+  it("processes multiple text nodes in sequence", async () => {
+    const input = `
+      <div prevent-widows>
+        <span>Lorem ipsum</span>
+        <span>Lorem ipsum</span>
+      </div>
+    `;
+
+    const expected = `
+      <div>
+        <span>Lorem&nbsp;ipsum</span>
+        <span>Lorem&nbsp;ipsum</span>
+      </div>
+    `;
+
+    const { html } = await posthtml().use(preventWidows()).process(input);
+    expect(html).toEqual(expected);
+  });
+
+  it("handles mixed content with custom encoding", async () => {
+    const input = `
+      <div prevent-widows>
+        <span>Lorem ipsum</span>
+      </div>
+    `;
+
+    const expected = `
+      <div>
+        <span>Lorem_ipsum</span>
+      </div>
+    `;
+
+    const { html } = await posthtml()
+      .use(preventWidows({}, { encoding: { space: "_", hyphen: "-" } }))
+      .process(input);
+
+    expect(html).toEqual(expected);
+  });
+
+  it("handles elements without content property", async () => {
+    const input = `
+      <div prevent-widows>
+        <br>
+      </div>
+    `;
+
+    const expected = `
+      <div>
+        <br>
+      </div>
+    `;
+
+    const { html } = await posthtml().use(preventWidows()).process(input);
+    expect(html).toEqual(expected);
+  });
+
+  it("handles empty prevent-widows element", async () => {
+    const input = `<div prevent-widows></div>`;
+
+    const expected = `<div></div>`;
 
     const { html } = await posthtml().use(preventWidows()).process(input);
     expect(html).toEqual(expected);

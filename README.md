@@ -3,16 +3,18 @@
 [![github actions build][img:gh-build]][url:gh-build]
 [![code coverage][img:codecov]][url:codecov]
 
-Prevent widows from appearing in a string.
+In typography, a **widow** is a short word or line at the end of a paragraph
+that appears alone on the last line, which can negatively impact readability
+and visual appearance.
 
 This module replaces the spaces and hyphens at the end of a paragraph with
 non-breaking spaces and non-breaking hyphens to prevent widows.
 
-It comes with support for strings and posthtml.
+It comes with support for strings and posthtml (optional).
 
 ## Installation
 
-```
+```bash
 npm install prevent-widows
 # - or -
 yarn add prevent-widows
@@ -20,18 +22,13 @@ yarn add prevent-widows
 
 ## Usage
 
-Prevent widows from appearing in a string.
-
-```javascript
-const preventWidows = require("prevent-widows");
-preventWidows("lorem ipsum dolar sit a met");
-// lorem ipsum dolar sit a&nbsp;met
-```
+### Basic String Processing
 
 ```typescript
 import preventWidows from "prevent-widows";
-preventWidows("lorem ipsum dolar sit a met");
-// lorem ipsum dolar sit a&nbsp;met
+const text = "The quick brown fox jumped over the lazy dog";
+const result = preventWidows(text);
+// "The quick brown fox jumped over the lazy&nbsp;dog"
 ```
 
 ## Options
@@ -72,7 +69,10 @@ preventWidows("lorem ipsum dolar sit a met", {
 
 ## posthtml
 
-This module comes with out-of-the-box support for [posthtml][url:posthtml].
+This module comes with optional support for [posthtml][url:posthtml].
+
+> **Note:** posthtml is listed as an optional peer dependency. If you only need
+> to process strings, you don't need to install it.
 
 ### Usage
 
@@ -144,8 +144,12 @@ When `false`, this will output:
 <div prevent-widows>Prevent widows</div>
 ```
 
+## License
+
+MIT
+
 [url:posthtml]: https://github.com/posthtml/posthtml
 [img:codecov]: https://codecov.io/gh/bashaus/prevent-widows/graph/badge.svg?token=D79154VC17
 [url:codecov]: https://codecov.io/gh/bashaus/prevent-widows
-[img:gh-build]: https://github.com/bashaus/prevent-widows/actions/workflows/build.yml/badge.svg
-[url:gh-build]: https://github.com/bashaus/prevent-widows/actions/workflows/build.yml
+[img:gh-build]: https://github.com/bashaus/prevent-widows/actions/workflows/test.yml/badge.svg
+[url:gh-build]: https://github.com/bashaus/prevent-widows/actions/workflows/test.yml

@@ -1,5 +1,5 @@
-import preventWidows from ".";
 import Encodings from "./encodings";
+import preventWidows from ".";
 
 describe("encoding", () => {
   /* default */

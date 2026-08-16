@@ -3,19 +3,21 @@
     "declaration": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
-    "lib": ["es2017"],
-    "module": "commonjs",
-    "moduleResolution": "node",
+    "lib": ["es2020"],
+    "module": "nodenext",
+    "moduleResolution": "nodenext",
     "noFallthroughCasesInSwitch": true,
     "noImplicitOverride": true,
     "noImplicitReturns": true,
     "noPropertyAccessFromIndexSignature": true,
+    "resolveJsonModule": true,
     "skipDefaultLibCheck": true,
     "skipLibCheck": true,
     "sourceMap": true,
     "strict": true,
-    "target": "es2015"
+    "target": "es2015",
+    "types": ["vitest/globals"]
   },
-  "include": ["./src/**/*.ts"],
+  "include": ["src/**/*.ts"],
   "exclude": ["node_modules"]
 }

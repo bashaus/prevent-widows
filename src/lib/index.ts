@@ -21,20 +21,10 @@ const preventWidows = (
   const { encoding } = options;
   const startAt = text.trimEnd().length - 1;
 
-  let lastNbsp = -1,
-    lastSpace = -1,
-    lastNbHyphen = -1,
-    lastHyphen = -1;
-
-  if (encoding.space) {
-    lastNbsp = text.lastIndexOf(encoding.space, startAt);
-    lastSpace = text.lastIndexOf(" ", startAt);
-  }
-
-  if (encoding.hyphen) {
-    lastNbHyphen = text.lastIndexOf(encoding.hyphen, startAt);
-    lastHyphen = text.lastIndexOf("-", startAt);
-  }
+  const lastNbsp = text.lastIndexOf(encoding.space, startAt);
+  const lastSpace = text.lastIndexOf(" ", startAt);
+  const lastNbHyphen = text.lastIndexOf(encoding.hyphen, startAt);
+  const lastHyphen = text.lastIndexOf("-", startAt);
 
   // Identify which character is last
   const lastCharacter = Math.max(lastNbsp, lastSpace, lastNbHyphen, lastHyphen);
